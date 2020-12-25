@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.trisotech.com/definitions/_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" xmlns:trisofeed="http://trisotech.com/feed" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisob="http://www.trisotech.com/2014/triso/bpmn" xmlns:trisocmmn="http://www.trisotech.com/2014/triso/cmmn" id="_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" name="Underwriting" targetNamespace="http://www.trisotech.com/definitions/_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <cmmn:case id="underwriting" name="Underwriting">
+    <cmmn:casePlanModel id="_manual_underwriting" name="Underwriting" autoComplete="true">
+      <cmmn:extensionElements>
+        <camunda:variableListener event="update" class="com.camunda.consulting.bpmn_cmmn_example.LoggerDelegate" />
+      </cmmn:extensionElements>
+      <cmmn:planItem id="PI_humanTaskDecide" definitionRef="PID_PI_humanTaskDecide">
+        <cmmn:itemControl id="PlanItemControl_0hire8s">
+          <cmmn:manualActivationRule id="ManualActivationRule_15kt8mz">
+            <cmmn:condition id="Expression_0q1zuig">${false}</cmmn:condition>
+          </cmmn:manualActivationRule>
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_milestoneApproved" definitionRef="PID_PI_milestoneApproved">
+        <cmmn:entryCriterion id="N65559_entry1" sentryRef="sentryApproved" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_milestoneRejected" definitionRef="PID_PI_milestoneRejected">
+        <cmmn:entryCriterion id="N65564_entry1" sentryRef="sentryRejected" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_humanTaskCoUnderwriter" definitionRef="PID_PI_humanTaskCoUnderwriter" />
+      <cmmn:planItem id="PI_processTaskDoctorRequest" definitionRef="PID_PI_processTaskDoctorRequest" />
+      <cmmn:planItem id="PI_humanTaskTeleInterview" definitionRef="PID_PI_humanTaskTeleInterview" />
+      <cmmn:planItem id="PI_humanTaskReviewInterview" definitionRef="PID_PI_humanTaskReviewInterview">
+        <cmmn:entryCriterion id="it_entry1" sentryRef="sentryInterviewFourEyesPrinciple" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_humanTaskSmoker" definitionRef="PID_PI_humanTaskSmoker">
+        <cmmn:entryCriterion id="N65590_entry1" sentryRef="sentrySmoker" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_humanTaskThereIsMore" name="humanTaskThereIsMore" definitionRef="HumanTask_12dadaw">
+        <cmmn:itemControl id="PlanItemControl_04vd3kr">
+          <cmmn:repetitionRule id="RepetitionRule_0oo8h1x">
+            <cmmn:condition id="Expression_04z6vk5">${score &lt; 50}</cmmn:condition>
+          </cmmn:repetitionRule>
+          <cmmn:manualActivationRule id="ManualActivationRule_1uczvij">
+            <cmmn:condition id="Expression_09x5kr9">${score &lt; 50}</cmmn:condition>
+          </cmmn:manualActivationRule>
+        </cmmn:itemControl>
+        <cmmn:entryCriterion id="EntryCriterion_0c2sie3" sentryRef="Sentry_0ep0qac" />
+      </cmmn:planItem>
+      <cmmn:sentry id="sentryRejected">
+        <cmmn:planItemOnPart id="_8361221e-d2f3-4478-a893-f2f45cf32510" sourceRef="PI_humanTaskDecide">
+          <cmmn:standardEvent>complete</cmmn:standardEvent>
+        </cmmn:planItemOnPart>
+        <cmmn:ifPart id="_7cce7cf5-b6a3-4615-ac04-a743f142ad34">
+          <cmmn:condition id="b88a2043-7bc8-448f-a61e-dd5227389791">${!approved}</cmmn:condition>
+        </cmmn:ifPart>
+      </cmmn:sentry>
+      <cmmn:sentry id="sentryInterviewFourEyesPrinciple">
+        <cmmn:planItemOnPart id="_45455fb7-7307-47ef-82b2-387da237b4b8" sourceRef="PI_humanTaskTeleInterview" triso:userConstraints="true">
+          <cmmn:standardEvent>complete</cmmn:standardEvent>
+        </cmmn:planItemOnPart>
+      </cmmn:sentry>
+      <cmmn:sentry id="sentrySmoker">
+        <cmmn:ifPart id="_8a54e75f-c7da-4562-9772-d715775cc5a0">
+          <cmmn:condition id="b40d219d-e1c9-4e20-a420-d5a4a79bda8b">${2&gt;1}</cmmn:condition>
+        </cmmn:ifPart>
+      </cmmn:sentry>
+      <cmmn:sentry id="sentryApproved">
+        <cmmn:planItemOnPart id="f4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7" sourceRef="PI_humanTaskDecide">
+          <cmmn:standardEvent>complete</cmmn:standardEvent>
+        </cmmn:planItemOnPart>
+        <cmmn:ifPart id="_23bec5a8-8130-49f0-b5ca-7848a153c188">
+          <cmmn:condition id="_5bdfbd10-45a1-4e5f-b296-f5fb3017fb6b">${approved}</cmmn:condition>
+        </cmmn:ifPart>
+      </cmmn:sentry>
+      <cmmn:sentry id="Sentry_0ep0qac">
+        <cmmn:ifPart id="IfPart_0n76i6x">
+          <cmmn:condition id="Expression_043qgv2">${1 &lt; 5}</cmmn:condition>
+        </cmmn:ifPart>
+      </cmmn:sentry>
+      <cmmn:humanTask id="PID_PI_humanTaskDecide" name="decide on application" camunda:assignee="demo" />
+      <cmmn:milestone id="PID_PI_milestoneApproved" name="approved">
+        <cmmn:extensionElements>
+          <camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
+        </cmmn:extensionElements>
+      </cmmn:milestone>
+      <cmmn:milestone id="PID_PI_milestoneRejected" name="rejected">
+        <cmmn:extensionElements>
+          <camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
+        </cmmn:extensionElements>
+      </cmmn:milestone>
+      <cmmn:humanTask id="PID_PI_humanTaskCoUnderwriter" name="comment from co-underwriter" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}">
+        <cmmn:defaultControl>
+          <cmmn:manualActivationRule id="_89ea34e0-4680-49e1-8164-cfbab7137b3b" />
+        </cmmn:defaultControl>
+      </cmmn:humanTask>
+      <cmmn:processTask id="PID_PI_processTaskDoctorRequest" name="doctor information request" processRef="DoctorInformationRequest">
+        <cmmn:defaultControl>
+          <cmmn:manualActivationRule id="_8e69722f-bec7-4837-b74a-8b47400dd841">
+            <cmmn:condition id="Expression_0vjrduw">${false}</cmmn:condition>
+          </cmmn:manualActivationRule>
+        </cmmn:defaultControl>
+      </cmmn:processTask>
+      <cmmn:humanTask id="PID_PI_humanTaskTeleInterview" name="tele-Interview with applicant" camunda:assignee="demo">
+        <cmmn:defaultControl />
+      </cmmn:humanTask>
+      <cmmn:humanTask id="PID_PI_humanTaskReviewInterview" name="review interview result" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}" />
+      <cmmn:humanTask id="PID_PI_humanTaskSmoker" name="adjust risk profile for smoker" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}">
+        <cmmn:defaultControl>
+          <cmmn:manualActivationRule id="cc134c47-61da-43b6-b0f7-2c17b5e9adda" />
+        </cmmn:defaultControl>
+      </cmmn:humanTask>
+      <cmmn:humanTask id="HumanTask_12dadaw" name="PI_humanTaskThereIsMore" camunda:assignee="demo">
+        <cmmn:extensionElements />
+      </cmmn:humanTask>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram sharedStyle="_378df23d-9b5b-43db-bd01-9453d98f3888" id="P_manual_underwriting" name="Underwriting">
+      <cmmndi:Size width="993" height="715" />
+      <cmmndi:CMMNShape id="Shape__manual_underwriting" cmmnElementRef="_manual_underwriting">
+        <dc:Bounds x="156" y="99" width="808" height="415" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_humanTaskDecide" cmmnElementRef="PI_humanTaskDecide">
+        <dc:Bounds x="196" y="157" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_milestoneApproved" cmmnElementRef="PI_milestoneApproved">
+        <dc:Bounds x="701" y="139" width="115" height="39" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_milestoneRejected" cmmnElementRef="PI_milestoneRejected">
+        <dc:Bounds x="701" y="207" width="115" height="39" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_humanTaskCoUnderwriter" cmmnElementRef="PI_humanTaskCoUnderwriter">
+        <dc:Bounds x="471" y="287" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_processTaskDoctorRequest" cmmnElementRef="PI_processTaskDoctorRequest">
+        <dc:Bounds x="332" y="287" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_humanTaskTeleInterview" cmmnElementRef="PI_humanTaskTeleInterview">
+        <dc:Bounds x="196" y="287" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_humanTaskReviewInterview" cmmnElementRef="PI_humanTaskReviewInterview">
+        <dc:Bounds x="275" y="398" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_PI_humanTaskSmoker" cmmnElementRef="PI_humanTaskSmoker">
+        <dc:Bounds x="630" y="279" width="96" height="76" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_N65564_entry1" cmmnElementRef="N65564_entry1">
+        <dc:Bounds x="691" y="216" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_N65585_entry1" cmmnElementRef="it_entry1">
+        <dc:Bounds x="265" y="422" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_N65590_entry1" cmmnElementRef="N65590_entry1">
+        <dc:Bounds x="620" y="303" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="Shape_N65559_entry1" cmmnElementRef="N65559_entry1">
+        <dc:Bounds x="691" y="142" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="Cf4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7" cmmnElementRef="f4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7" targetCMMNElementRef="N65559_entry1" isStandardEventVisible="false">
+        <di:waypoint x="292" y="195" />
+        <di:waypoint x="492.5257340400653" y="195" />
+        <di:waypoint x="492.5257340400653" y="155.9122282918978" />
+        <di:waypoint x="693.05145" y="155.91222800000003" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="467" y="165" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="C_8361221e-d2f3-4478-a893-f2f45cf32510" cmmnElementRef="_8361221e-d2f3-4478-a893-f2f45cf32510" targetCMMNElementRef="N65564_entry1" isStandardEventVisible="false">
+        <di:waypoint x="292" y="195" />
+        <di:waypoint x="492.62807593197135" y="195" />
+        <di:waypoint x="492.62807593197135" y="230.24492464441494" />
+        <di:waypoint x="693.25616" y="230.24493" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="467" y="203" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="C_45455fb7-7307-47ef-82b2-387da237b4b8" cmmnElementRef="_45455fb7-7307-47ef-82b2-387da237b4b8" targetCMMNElementRef="it_entry1" isStandardEventVisible="false">
+        <di:waypoint x="244.49484536082474" y="363.578125" />
+        <di:waypoint x="244.49484536082474" y="436" />
+        <di:waypoint x="265" y="436" />
+        <cmmndi:CMMNLabel>
+          <dc:Bounds x="218" y="390" width="51" height="13" />
+        </cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNShape id="PlanItem_1cjnpeq_di" cmmnElementRef="PI_humanTaskThereIsMore">
+        <dc:Bounds x="628" y="396" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_0c2sie3_di" cmmnElementRef="EntryCriterion_0c2sie3">
+        <dc:Bounds x="618" y="421" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+    <cmmndi:CMMNStyle id="_378df23d-9b5b-43db-bd01-9453d98f3888" fontFamily="Arial,Helvetica,sans-serif" />
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
