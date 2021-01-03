@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="_DdZocL47EeOQo_IRkjDF6w" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <bpmn2:signal id="Signal_0e19ug9" name="sendHelloLetter_${execution.processInstanceId}" />
-  <bpmn2:signal id="Signal_0o7gzo0" name="call_two_step_process_${execution.processInstanceId}" />
   <bpmn2:collaboration id="Collaboration_0i92gjv">
     <bpmn2:participant id="Participant_1jvvoee" name="Two step process" processRef="two_step_process" />
   </bpmn2:collaboration>

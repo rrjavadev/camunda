@@ -3,9 +3,6 @@ package com.camunda.consulting.bpmn_cmmn_example;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.rest.dto.SignalDto;
-import org.camunda.bpm.engine.rest.dto.VariableValueDto;
-import org.camunda.bpm.engine.rest.exception.InvalidRequestException;
 import org.camunda.bpm.engine.runtime.SignalEventReceivedBuilder;
 
 import java.util.logging.Logger;
@@ -31,10 +28,15 @@ public class SignalEventListener implements JavaDelegate {
         RuntimeService runtimeService = delegateExecution.getProcessEngine().getRuntimeService();
         String processInstanceId = delegateExecution.getProcessInstance().getProcessInstanceId();
 
-        String name = "call_two_step_process_" + processInstanceId;
-        LOGGER.info("process instance id" + name);
+        String twoStepProcess = "call_two_step_process_" + processInstanceId;
+        LOGGER.info("process instance id" + twoStepProcess);
 
-        SignalEventReceivedBuilder signalEvent = runtimeService.createSignalEvent(name);
-        signalEvent.send();
+        String sendCorrespondence = "sendCorrespondence_" + processInstanceId;
+        LOGGER.info("process instance id" + sendCorrespondence);
+
+        SignalEventReceivedBuilder signalEvent1 = runtimeService.createSignalEvent(twoStepProcess);
+        SignalEventReceivedBuilder signalEvent2 = runtimeService.createSignalEvent(sendCorrespondence);
+        signalEvent1.send();
+        signalEvent2.send();
     }
 }

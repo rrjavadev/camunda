@@ -139,7 +139,7 @@
   <bpmn:signal id="Signal_17ma8xt" name="remindViaTelephone_${execution.processInstanceId}" />
   <bpmn:signal id="Signal_0vym1cc" name="subprocess_sentry_reevaluation_${execution.processInstanceId}" />
   <bpmn:signal id="Signal_0mwkmea" name="remindViaMail_${execution.processInstanceId}" />
-  <bpmn:signal id="Signal_0z0uj6i" name="sendHelloLetter_${execution.processInstanceId}" />
+  <bpmn:signal id="Signal_0z0uj6i" name="sendDebtLetter_${execution.processInstanceId}" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0rsb9qy">
       <bpmndi:BPMNShape id="Participant_0palvjt_di" bpmnElement="Participant_0palvjt" isHorizontal="true">
