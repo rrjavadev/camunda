@@ -2,6 +2,7 @@ package com.camunda.consulting.bpmn_cmmn_example;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Named;
 import java.util.logging.Logger;
@@ -10,7 +11,8 @@ import java.util.logging.Logger;
  * This is an empty service implementation illustrating how to use a plain Java 
  * class as a BPMN 2.0 Service Task delegate.
  */
-@Named("logger")
+@Named("loggerDelegate")
+@Component
 public class LoggerDelegate implements JavaDelegate {
  
   private final Logger LOGGER = Logger.getLogger(LoggerDelegate.class.getName());
