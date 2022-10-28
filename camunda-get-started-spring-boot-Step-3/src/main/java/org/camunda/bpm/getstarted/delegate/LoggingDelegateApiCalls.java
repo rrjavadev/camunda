@@ -26,9 +26,10 @@ public class LoggingDelegateApiCalls implements JavaDelegate {
         String businessKey = execution.getProcessBusinessKey();
         if("success".equals(businessKey)){
             LOGGER.info("Successfully completed " + execution.getCurrentActivityName());
+            LOGGER.info("Input Variables: " + execution.getVariables());
         }else if("fail".equals(businessKey)){
-            LOGGER.info( execution.getCurrentActivityName() + "failed!");
-            throw new BpmnError(execution.getCurrentActivityId() + "failed", "An error has occurred while making the api call. Please retry.");
+            LOGGER.info( execution.getCurrentActivityName() + " failed!");
+            throw new BpmnError(execution.getCurrentActivityId() + " failed", "An error has occurred while making the api call. Please retry.");
         }
     }
 }
