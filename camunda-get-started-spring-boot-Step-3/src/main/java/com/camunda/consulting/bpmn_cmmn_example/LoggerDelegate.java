@@ -27,5 +27,4 @@ public class LoggerDelegate implements JavaDelegate {
             + " \n\n");
     
   }
-
 }
