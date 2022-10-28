@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * This is an empty service implementation illustrating how to use a plain Java
  * class as a BPMN 2.0 Service Task delegate.
  */
-@Named("logger")
+@Named("complete_task")
 public class CompleteTaskListener implements JavaDelegate {
 
     private final Logger LOGGER = Logger.getLogger(CompleteTaskListener.class.getName());
@@ -24,6 +24,7 @@ public class CompleteTaskListener implements JavaDelegate {
                 + ", processInstanceId=" + execution.getProcessInstanceId()
                 + ", businessKey=" + execution.getProcessBusinessKey()
                 + ", executionId=" + execution.getId()
+                + "publisherIntentId" + execution.getVariable("publisherIntentId")
                 + " \n\n");
 
         execution.setVariable("letterSent", true);

@@ -41,7 +41,7 @@ public class UnderwritingController {
 //                .setVariableLocal("score", 1)
 //                .setVariable("score", 1).execute();
 
-       //s processEngine.getTaskService().setVariable();
+       //processEngine.getTaskService().setVariable();
 
         runtimeService.setVariable(processInstanceId, "score", 49);
     }
