@@ -1,4 +1,4 @@
-package org.camunda.bpm.getstarted.delegate;
+package com.camunda.onboarding;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -6,8 +6,6 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
-
-import static java.lang.System.Logger.Level.ERROR;
 
 @Component
 public class LoggingDelegateApiCalls implements JavaDelegate {
