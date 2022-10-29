@@ -23,15 +23,16 @@
       <bpmn:outgoing>Flow_12jc8e4</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:parallelGateway id="Gateway_0qxicgi">
-      <bpmn:extensionElements>
-        <camunda:executionListener class="com.camunda.onboarding.LoggingExecutionListener" event="end" />
-      </bpmn:extensionElements>
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_1bekrf2</bpmn:incoming>
       <bpmn:incoming>Flow_0m6qvwv</bpmn:incoming>
       <bpmn:incoming>Flow_00a1lmn</bpmn:incoming>
       <bpmn:outgoing>Flow_1ija4yk</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:endEvent id="Event_1ft73oc">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.camunda.onboarding.LoggingExecutionListener" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ija4yk</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:startEvent id="Event_0a77z1c">
